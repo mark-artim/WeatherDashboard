@@ -1,0 +1,122 @@
+* {
+    /* font-family: Arial, Helvetica, sans-serif; */
+    font-family: 'Roboto', sans-serif;
+}
+
+:root {
+    --header-back: #28313B;
+    --footer-back: #28313B;
+    --header-font: white;
+    --footer-font: white;
+
+  }
+
+#page {
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+    grid-template-areas: "header header"
+                         "sidebar weathNow"
+                         "sidebar fiveDay"
+                         "footer footer";
+    grid-template-columns: 22% 78%;
+    grid-template-rows: 10% 35% 45% 10%;
+  }
+
+  @media (max-width: 700px) {
+    #page {
+      display: grid;
+      width: 100%;
+      height: 100vh;
+      grid-template-areas:  "header"
+                            "sidebar"
+                            "weathNow"
+                            "fiveDay"
+                            "footer";
+      grid-template-rows: 1fr 1fr 6fr 1fr;
+      /* grid-template-columns: 1fr; */
+      font-size: 1.5em;
+    }
+  }
+
+  header {
+    grid-area: header;
+    background-color: var(--header-back);
+    color: var(--header-font);
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: medium;
+  }
+
+  sidebar {
+    grid-area: sidebar;
+    background-color: white;
+    padding: 10px;
+  }
+
+  .fiveDayContainer {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .fiveDayCard {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    /* background-color: yellow; */
+    /* max-height: 200px; */
+    width: 200px;
+    box-shadow:         3px 3px 5px 6px purple;
+    margin: 15px;
+  }
+
+  .cardDate {
+    font-weight: 900;
+    font-size: 1.1em;
+  }
+
+  fiveDay {
+    grid-area: fiveDay;
+    background-color:white;
+    padding: 1em;
+    margin: 2%;
+  }
+
+  weathNow {
+    grid-area: weathNow;
+    background-color:white;
+    padding: 1em;
+    margin: 2%;
+  }
+
+  footer {
+    grid-area: footer;
+    background-color: var(--footer-back);
+    color: var(--footer-font);
+    padding-bottom: 0px;
+  }
+
+  .cityList {
+    background-color: purple;
+    color: white;
+    padding:5px 10px 5px 10px;
+    margin: 5px 5px;
+    border-radius: 10px;
+    text-decoration: none;
+  }
+  .shadow {
+    -webkit-box-shadow: 3px 3px 5px 8px purple;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    -moz-box-shadow:    3px 3px 5px 8px purple;  /* Firefox 3.5 - 3.6 */
+    box-shadow:         3px 3px 5px 8px purple;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  }
+
+  #location {
+    font-size: x-large;
+  }
+
+  .now {
+    font-size: large;
+    font-weight: 500;
+  }
