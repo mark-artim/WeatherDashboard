@@ -33,7 +33,7 @@
                             "weathNow"
                             "fiveDay"
                             "footer";
-      grid-template-rows: 1fr 1fr 6fr 1fr;
+      grid-template-rows: 10% 35% 45% 10%;
       /* grid-template-columns: 1fr; */
       font-size: 1.5em;
     }
