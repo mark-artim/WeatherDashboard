@@ -33,9 +33,14 @@
                             "weathNow"
                             "fiveDay"
                             "footer";
-      /* grid-template-rows: 10% 35% 45% 10%; */
+      grid-template-rows: 10% auto auto auto 10%;
       grid-template-columns: 1fr;
       font-size: 1.5em;
+    }
+    .fiveDayContainer {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
     }
   }
 
