@@ -5,6 +5,10 @@
 
 This single page website uses the openweathermap.org API's to provide weather based on user input. The user is able to enter search criteria in the format "city,st" (city comma 2 letter state) and will get the current weather along with the 5 day forecast. Cities are stored in local storage for the user's past searches from most recent to oldest. The page defaults to Hololulu as a fun starting value so the page is not blank. The user can enter a new city or click on a city in their history and see teh current information.
 
+There are probably many different ways to get the "city" related information to the api and tehre were different api options to get the data. The api with all the infomration to meet requirements was teh One Call API which requires latitude and longitude as opposed to city and state. The only true way to get the city that the user intends to me is to allow them to enter both city and state in order to make the results unique or close to unique as opposed to just city; therefore, I chose teh new Geocoding API and passed in CITY,ST from the user to get back lat and long and then pass that to the One Call API.
+
+The logic is not perfect as it does not validate state which is a future enhancement but it eliminates the alternative whcih is to pass city only and get back an arbitrary "Springfield" for which there are 50.
+
 The page is responsive and shows all sections vertically once the screen width is less than 700px. 
 
 ## Table of Contents (Optional)
@@ -21,7 +25,7 @@ This README is very not long but here is a table of contents nonetheless.
 
 The site is a single page html document with css, javascript and images so installation is straightforward: (1) push code to Github (2) Navigate to live link and make sure the site displays correctly. It does require an API key to opeweather which is currently stored inappropriately in javascript.
 
-The site can be reached at [PW Generator](https://mark-artim.github.io/WeatherDashboard/) 
+The site can be reached at [Weather Dashboard](https://mark-artim.github.io/WeatherDashboard/) 
 
 ## Usage 
 
