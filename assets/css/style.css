@@ -83,6 +83,10 @@
     padding: 1em;
     margin: 2%;
   }
+  .fiveDicon {
+    width: 50%;
+  
+  }
 
   weathNow {
     grid-area: weathNow;
