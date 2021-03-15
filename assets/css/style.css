@@ -20,7 +20,7 @@
                          "sidebar fiveDay"
                          "footer footer";
     grid-template-columns: 22% 78%;
-    grid-template-rows: 10% 35% 45% 10%;
+    grid-template-rows: 10% auto auto 10%;
   }
 
   @media (max-width: 700px) {
