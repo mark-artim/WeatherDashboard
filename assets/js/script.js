@@ -3,7 +3,6 @@
 
 // GET AND DISPLAY PREVIOUS CITIES FROM LOCAL STORAGE    
     function showPrevCities(type) {
-        console.log("up top: "+type);
         // clear current City List
         $("#cityList").empty();
         var prevCitiesRaw = localStorage.getItem("prevCities");
@@ -19,7 +18,7 @@
             newListItem.setAttribute("data-state",prevCities[k].state);
             newListItem.setAttribute("data-lat",prevCities[k].lat);
             newListItem.setAttribute("data-lon",prevCities[k].lon);
-            newListItem.textContent = prevCities[k].city;
+            newListItem.textContent = prevCities[k].city+", "+prevCities[k].state;
             cityDisplay.appendChild(newListItem);
         }  
     }
@@ -80,7 +79,7 @@ function storeCity(lat,lon,city,state) {
         fetch(url)
           .then(response => response.json())
           .then(function (data) {
-            console.log("Hello from getWeather" + lat + "/" + lon);
+            // console.log("Hello from getWeather" + lat + "/" + lon);
             drawWeather(data,city,state);
           })
           .catch(function () {
@@ -90,16 +89,33 @@ function storeCity(lat,lon,city,state) {
 
   
       function drawWeather(d,city,state) {
-        console.log("Hello from drawWeather. city: "+city+"state: "+state);
         console.log(d);
-        document.getElementById('location').innerHTML = city; // + ", " + state;
+        document.getElementById('location').innerHTML = city + ", " + state;
         document.getElementById('description').innerHTML = "Currently " + d.current.weather[0].description;
         document.getElementById('temp').innerHTML = "The temperature right now is " + d.current.temp.toFixed() + '&deg;' + " but it feels like " + d.current.feels_like.toFixed() + '&deg;';
         document.getElementById('minmax').innerHTML = "Today's low is " + d.daily[0].temp.min.toFixed() + " and the high will be " + d.daily[0].temp.max.toFixed();
         var currentIcon = d.current.weather[0].icon;
         var currentIconURL = "http://openweathermap.org/img/wn/"+currentIcon+"@2x.png";
-        console.log("icon: "+currentIconURL);
         document.getElementById("nowIcon").src=currentIconURL;
+        document.getElementById('windSp').innerHTML = "The current Wind Sped is " + d.current.wind_speed.toFixed();
+        // UV Index stuff 
+        // var uviValue = d.daily[0].uvi.toFixed();
+        var uviValue = 7;
+
+        var uviLevel = "HIGH";
+        if (uviValue*1 < 4) {
+                uviLevel = "LOW";
+                uviClass = document.getElementById("nowUvi");
+                uviClass.setAttribute("class","green")
+            } else if (uviValue*1 < 8) {
+                uviLevel = "MEDIUM";
+                uviClass = document.getElementById("nowUvi");
+                uviClass.setAttribute("class","yellow")
+            } else {
+                uviClass = document.getElementById("nowUvi");
+                uviClass.setAttribute("class","red")
+            };
+        document.getElementById('nowUvi').innerHTML = "The current UV Index is " + uviValue + " and that is value is "+uviLevel;
         // document.getElementById('tempmax').innerHTML = "The high today is " + tempmax + '&deg';
         
 // DISPLAY THE 5 DAY FORECAST   
@@ -116,7 +132,6 @@ function storeCity(lat,lon,city,state) {
         var hum = d.daily[i].humidity;
         var currentIcon = d.daily[i].weather[0].icon;
         var currentIconURL = "http://openweathermap.org/img/wn/"+currentIcon+".png";
-        console.log("icon: "+currentIconURL);
         // document.getElementById("nowIcon").src=currentIconURL;
         // console.log("desc: "+weathDesc+" uvi: "+uvi+" hum; "+hum);
         //get elements in place to attach stuff to
@@ -139,7 +154,7 @@ function storeCity(lat,lon,city,state) {
         lowE.textContent = "Low: "+ low.toFixed();
         highE.textContent = "High: "+ high.toFixed();
         weathDescE.textContent = weathDesc;
-        uviE.textContent = "UV Index: "+uvi;
+        uviE.textContent = "UV Index: "+uvi.toFixed();
         humE.textContent = "Humidty: "+hum;
         dailyContainer.appendChild(oneDay);
         var card = document.getElementById("card"+i);
@@ -163,7 +178,6 @@ getWeather("21.3069","-157.8583","Honolulu","HI")
 
 //Listen for click on city
 var cities = document.getElementById("cityList");
-console.log("cities; " + cities);
 cities.addEventListener("click", function(event){
     // clear current 5 day forecast
     $("#5day").empty();
@@ -173,8 +187,8 @@ cities.addEventListener("click", function(event){
     var lon = event.target.dataset.lon;
     var city = event.target.dataset.city;
     var state = event.target.dataset.state;
-    console.log("From event listener the city is: " + city)
-    console.log("lat: "+lat+" lon: "+lon)
+    // console.log("From event listener the city is: " + city)
+    // console.log("lat: "+lat+" lon: "+lon)
     document.getElementsByClassName("fiveDayCard").innerHTML = "";
     getWeather(lat,lon,city,state);
 })
