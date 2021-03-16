@@ -28,6 +28,7 @@
     function cityValidation(citySt) {
         // if(citySt == "") {
             var citySt = document.getElementById('city').value;
+            // citySt.reset();
         // }
         console.log(citySt);
         var checkMe = citySt.split(",");
@@ -49,6 +50,7 @@
             console.log("lat/long/city/st: "+lat+"/"+lon+"/"+city+"/"+state);
             // getWeather(lat,lon,city,state);
             storeCity(lat,lon,city,state);
+            document.getElementById("city").value = "";
           })
           .catch(function () {
   
@@ -99,8 +101,8 @@ function storeCity(lat,lon,city,state) {
         document.getElementById("nowIcon").src=currentIconURL;
         document.getElementById('windSp').innerHTML = "The current Wind Sped is " + d.current.wind_speed.toFixed();
         // UV Index stuff 
-        // var uviValue = d.daily[0].uvi.toFixed();
-        var uviValue = 7;
+        var uviValue = d.daily[0].uvi.toFixed();
+        // var uviValue = 7;
 
         var uviLevel = "HIGH";
         if (uviValue*1 < 4) {
